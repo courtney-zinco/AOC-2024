@@ -34,19 +34,12 @@ foreach($pageNumbers as $pageNumberLine){
     //echo 'Checking'.json_encode($pageNumberLine)."\n";
     $success = testSuccess($rules, $pageNumberLine);
     
-    if(!is_array($success)){
-        //$successfulPageRowsCenterValue = $pageNumberLine[floor(count($pageNumberLine)/2)];
-        //$successfulPageRowsCenterValues[] = $successfulPageRowsCenterValue;
-        echo ''.json_encode($pageNumberLine)." is a success - its middle value is ".$successfulPageRowsCenterValue."\n";
-    }else{
-        echo 'this one is a failure, swap values until it matches'."\n";        
-        while(is_array(testSuccess($rules, $pageNumberLine))){
+    if(is_array($success)){      
+        while(is_array($success)){
             // Swap the numbers around
-            $testSuccess = testSuccess($rules, $pageNumberLine);            
-            $pageNumberLine[$testSuccess[3]] = $testSuccess[0];
-            $pageNumberLine[$testSuccess[1]] = $testSuccess[2];     
-            print_r($pageNumberLine); 
-                  
+            $pageNumberLine[$success[3]] = $success[0];
+            $pageNumberLine[$success[1]] = $success[2];                                   
+            $success = testSuccess($rules, $pageNumberLine); // Update the success variable
         }
         $successfulPageRowsCenterValue = $pageNumberLine[floor(count($pageNumberLine)/2)];
         $successfulPageRowsCenterValues[] = $successfulPageRowsCenterValue;
