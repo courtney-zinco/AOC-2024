@@ -59,8 +59,8 @@ exit;
 
 function saveFrameAsImage($visitedLocationTracker, $frameCounter) {
     $image = imagecreatetruecolor(1500, 1500); // Adjust size as needed
-    $backgroundColor = imagecolorallocate($image, 0, 0, 0); // White background
-    $textColor = imagecolorallocate($image, 255, 255, 255); // Black text
+    $backgroundColor = imagecolorallocate($image, 0, 0, 0); // Black background
+    $textColor = imagecolorallocate($image, 255, 255, 255); // white text
 
     imagefill($image, 0, 0, $backgroundColor);
 
@@ -69,9 +69,9 @@ function saveFrameAsImage($visitedLocationTracker, $frameCounter) {
         $x = 10;
         foreach ($row as $value) {
             imagestring($image, 1, $x, $y, $value, $textColor);
-            $x += 10; // Adjust spacing as needed
+            $x += 10;
         }
-        $y += 10; // Adjust spacing as needed
+        $y += 10;
     }
 
     imagepng($image, sprintf('frame_%04d.png', $frameCounter));
